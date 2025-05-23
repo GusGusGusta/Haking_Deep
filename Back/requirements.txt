@@ -9,6 +9,7 @@ python-dotenv
 pydantic
 python-nmap
 openai
+django-cors-heders
 
 # Django>=4.2,<4.3
 # djangorestframework>=3.14,<3.15
