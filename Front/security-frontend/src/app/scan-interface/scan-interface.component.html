@@ -1,0 +1,122 @@
+<div class="container">
+  <h1>Interfaz de Escaneo de Seguridad</h1>
+  <p class="subtitulo">Ingresa un objetivo para analizar y selecciona el tipo de escaneo.</p>
+
+  <div class="form-section">
+    <div>
+      <label for="urlDominio">URL/Dominio:</label>
+      <input type="text" id="urlDominio" [(ngModel)]="urlDominio" placeholder="ejemplo.com" [disabled]="isLoading || isGeneratingPdf">
+    </div>
+
+    <div>
+      <label for="escenario">Tipo de Escenario:</label>
+      <select id="escenario" [(ngModel)]="escenarioSeleccionado" [disabled]="isLoading || isGeneratingPdf">
+        <option value="basic">Básico (DNS, Nmap, Whois)</option>
+        <option value="complete">Completo (DNS, Nmap, Whois, Google Dorks)</option>
+      </select>
+    </div>
+    
+    <div *ngIf="escenarioSeleccionado === 'complete'" class="gquery-input">
+      <label for="gquery">Query Google Dorks (Opcional):</label>
+      <input type="text" id="gquery" [(ngModel)]="gquery" placeholder="Ej: intitle:login" [disabled]="isLoading || isGeneratingPdf">
+      <p class="form-help-text">
+        Otros ejemplos: <code>filetype:pdf</code>, <code>inurl:admin</code>, <code>"Index of /backup"</code>, <code>ext:sql "config"</code>
+      </p>
+    </div>
+
+    <button (click)="enviarConsulta()" [disabled]="isLoading || isGeneratingPdf || !urlDominio">
+      <span *ngIf="isLoading" class="spinner"></span>
+      {{ isLoading ? currentStatusMessage : 'Iniciar Escaneo' }}
+    </button>
+    </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p><strong>Error:</strong> {{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="scanResults" class="results-section" #scanResultsContainer id="scanResultsContainer">
+    <h2>Resultados del Escaneo para: <span class="highlight">{{ scanResults.url_dominio }}</span></h2>
+    <p><strong>Escenario:</strong> <span class="highlight">{{ scanResults.scenario | titlecase }}</span></p>
+    <div class="result-block" *ngIf="scanResults.scan_results?.dns as dnsData">
+      <h3><i class="icon-dns"></i>Resultados DNS</h3>
+      <div *ngIf="dnsData.error" class="error-item">Error: {{ dnsData.error }}</div>
+      <ul *ngIf="dnsData.details && objectKeys(dnsData.details).length > 0">
+        <li *ngFor="let recordType of objectKeys(dnsData.details)">
+          <strong>{{ recordType }}:</strong>
+          <ul *ngIf="dnsData.details[recordType]?.length > 0; else noDnsRecordsFound">
+            <li *ngFor="let record of dnsData.details[recordType]">{{ record }}</li>
+          </ul>
+          <ng-template #noDnsRecordsFound> (No se encontraron registros para este tipo)</ng-template>
+        </li>
+      </ul>
+      <p *ngIf="(!dnsData.details || objectKeys(dnsData.details).length === 0) && !dnsData.error">No se encontraron datos DNS significativos.</p>
+    </div>
+    <div class="result-block" *ngIf="scanResults.scan_results?.nmap as nmapHosts">
+      <h3><i class="icon-nmap"></i>Resultados Nmap</h3>
+      <div *ngIf="!nmapHosts || (nmapHosts | json) === '[]' || nmapHosts.length === 0"><p>No se obtuvieron datos Nmap o el escaneo fue omitido/falló.</p></div>
+      <div *ngFor="let host of nmapHosts">
+        <div *ngIf="host.status === 'omitted'" class="omitted-item">Nmap omitido: {{ host.reason }}</div>
+        <div *ngIf="host.status !== 'omitted'">
+          <h4>Host: {{ host.ip }} (Estado: {{ host.status || 'desconocido' }})</h4>
+          <div *ngIf="host.error" class="error-item">Error Nmap: {{ host.error }}</div>
+          <table *ngIf="host.ports?.length > 0">
+            <thead><tr><th>Puerto</th><th>Protocolo</th><th>Estado</th><th>Servicio</th></tr></thead>
+            <tbody><tr *ngFor="let port of host.ports"><td>{{ port.port }}</td><td>{{ port.protocol }}</td><td>{{ port.state }}</td><td>{{ port.service?.name }} {{ port.service?.product }} {{ port.service?.version }} <span *ngIf="port.service?.extrainfo">({{ port.service?.extrainfo }})</span></td></tr></tbody>
+          </table>
+          <p *ngIf="(!host.ports || host.ports.length === 0) && !host.error">No se encontraron puertos abiertos.</p>
+        </div>
+      </div>
+    </div>
+    <div class="result-block" *ngIf="scanResults.scan_results?.whois as whoisData">
+      <h3><i class="icon-whois"></i>Resultados Whois</h3>
+      <div *ngIf="whoisData.error" class="error-item">Error Whois: {{ whoisData.error }}</div>
+      <ul *ngIf="!whoisData.error">
+        <li *ngIf="whoisData.domain_name?.length > 0"><strong>Nombre de Dominio:</strong> {{ whoisData.domain_name.join(', ') }}</li>
+        <li *ngIf="whoisData.registrar"><strong>Registrador:</strong> {{ whoisData.registrar }}</li>
+        <li *ngIf="whoisData.creation_date"><strong>Fecha de Creación:</strong> {{ whoisData.creation_date }}</li>
+        <li *ngIf="whoisData.expiration_date"><strong>Fecha de Expiración:</strong> {{ whoisData.expiration_date }}</li>
+        <li *ngIf="whoisData.updated_date"><strong>Última Actualización:</strong> {{ whoisData.updated_date }}</li>
+        <li *ngIf="whoisData.name_servers?.length > 0"><strong>Servidores de Nombre:</strong> {{ whoisData.name_servers.join(', ') }}</li>
+        <li *ngIf="whoisData.status?.length > 0"><strong>Estado:</strong> {{ whoisData.status.join(', ') }}</li>
+        <li *ngIf="whoisData.emails?.length > 0"><strong>Emails:</strong> {{ whoisData.emails.join(', ') }}</li>
+        <li *ngIf="whoisData.country"><strong>País:</strong> {{ whoisData.country }}</li>
+      </ul>
+       <p *ngIf="!whoisData.domain_name && !whoisData.registrar && !whoisData.error && (!whoisData.status || whoisData.status.length === 0)">No se encontraron datos Whois.</p>
+    </div>
+    <div class="result-block" *ngIf="scanResults.scan_results?.google_dorks as gDorksData">
+      <h3><i class="icon-search"></i>Resultados Google Dorks</h3>
+      <div *ngIf="gDorksData.status === 'omitted'" class="omitted-item">Google Dorks omitido: {{ gDorksData.reason }}</div>
+      <div *ngIf="gDorksData.status !== 'omitted'">
+        <div *ngIf="gDorksData.error" class="error-item">Error Google Dorks: {{ gDorksData.error }} (Query: {{ gDorksData.query_executed }})</div>
+        <div *ngIf="!gDorksData.error">
+          <p><strong>Query Ejecutado:</strong> <code class="code-block">{{ gDorksData.query_executed }}</code></p>
+          <ul *ngIf="gDorksData.results?.length > 0">
+            <li *ngFor="let item of gDorksData.results"><strong>{{ item.title }}</strong><br><a [href]="item.link" target="_blank" rel="noopener noreferrer">{{ item.link }}</a><br><em>{{ item.snippet }}</em></li>
+          </ul>
+          <p *ngIf="!gDorksData.results || gDorksData.results.length === 0">No se encontraron ítems.</p>
+        </div>
+      </div>
+    </div>
+    <div class="result-block" *ngIf="scanResults.deepseek_analysis">
+      <h3><i class="icon-ai"></i>Análisis de DeepSeek</h3>
+      <pre id="deepseekAnalysisContent">{{ scanResults.deepseek_analysis }}</pre>
+    </div>
+    <div *ngIf="scanResults.execution_errors && scanResults.execution_errors.length > 0" class="error-section">
+        <h3><i class="icon-error"></i>Errores Adicionales:</h3>
+        <ul><li *ngFor="let err of scanResults.execution_errors">{{ err }}</li></ul>
+    </div>
+  </div> <div class="result-block report-download" *ngIf="scanResults && !isLoading"> 
+      <h3><i class="icon-download"></i>Descargar Reporte PDF</h3>
+      <p>
+          <button 
+              type="button" 
+              (click)="downloadReportAsPDF($event)"
+              class="button-like" 
+              [disabled]="isGeneratingPdf || !scanResults"> 
+              <span *ngIf="isGeneratingPdf" class="spinner"></span>
+              {{ isGeneratingPdf ? 'Generando PDF...' : 'Descargar como PDF' }}
+          </button>
+      </p>
+      <p class="small-text">(Se generará un PDF con los re| sultados visibles actualmente en pantalla).</p>
+  </div>
+</div>/*

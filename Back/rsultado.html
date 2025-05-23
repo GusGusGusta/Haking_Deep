@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Escaneo: dipreca.cl</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333;
+}
+        .container { width: 90%; max-width: 1000px; margin: 20px auto; background-color: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,
+    0,
+    0,
+    0.1);
+}
+        h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 15px; margin-bottom: 20px;
+}
+        h2 { color: #3498db; margin-top: 30px; border-bottom: 2px solid #aec6cf; padding-bottom: 8px;
+}
+        .section { margin-bottom: 25px; padding: 20px; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 6px;
+}
+        .section h2 { margin-top: 0;
+}
+        pre { background-color: #2d2d2d; color: #f0f0f0; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9em; border: 1px solid #444; line-height: 1.6; overflow-x: auto;
+}
+        .error { color: #e74c3c; font-weight: bold;
+}
+        .error-section { background-color: #fdd; border-left: 5px solid #e74c3c; padding: 15px;
+}
+        ul { list-style-type: disc; padding-left: 20px;
+}
+        ul li { margin-bottom: 8px;
+}
+        ul li b { color: #2980b9;
+}
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; box-shadow: 0 2px 3px rgba(0,
+    0,
+    0,
+    0.1);
+}
+        th, td { text-align: left; padding: 10px; border: 1px solid #ddd;
+}
+        th { background-color: #3498db; color: white; font-weight: bold;
+}
+        tr:nth-child(even) { background-color: #f7f9f9;
+}
+        .details-block p { margin: 5px 0;
+}
+        .code { font-family: 'Consolas', 'Courier New', monospace; background-color: #e9e9e9; padding: 2px 5px; border-radius: 3px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reporte de Escaneo de Seguridad</h1>
+        <div class="section">
+            <h2>Información General</h2>
+            <p><strong>Objetivo:</strong> <span class="code">dipreca.cl</span></p>
+            <p><strong>Escenario:</strong> Complete</p>
+        </div>
+    <div class='section'><h2>Resultados DNS</h2><ul><li><b>A:</b><ul><li>200.54.84.255</li></ul></li><li><b>AAAA:</b> (No se encontraron registros)</li><li><b>CNAME:</b> (No se encontraron registros)</li><li><b>MX:</b><ul><li>5 alt2.aspmx.l.google.com.</li><li>10 alt4.aspmx.l.google.com.</li><li>1 aspmx.l.google.com.</li><li>10 alt3.aspmx.l.google.com.</li><li>5 alt1.aspmx.l.google.com.</li></ul></li><li><b>NS:</b><ul><li>200.54.0.10.</li><li>ns.dipreca.cl.</li></ul></li><li><b>SOA:</b><ul><li>ns.dipreca.cl. admin. 8977 180 180 432000 3600</li></ul></li><li><b>TXT:</b> (No se encontraron registros)</li></ul></div><div class='section'><h2>Resultados Nmap</h2><h3>Host: 200.54.84.255</h3><p><strong>Estado:</strong> up_with_open_ports</p><table><thead><tr><th>Puerto</th><th>Protocolo</th><th>Estado</th><th>Servicio</th></tr></thead><tbody><tr><td>80</td><td>tcp</td><td>open</td><td>http Apache httpd</td></tr><tr><td>113</td><td>tcp</td><td>closed</td><td>ident</td></tr><tr><td>443</td><td>tcp</td><td>open</td><td>http Apache httpd</td></tr><tr><td>8443</td><td>tcp</td><td>open</td><td>http Apache httpd</td></tr></tbody></table><hr style='border: 0; border-top: 1px solid #eee; margin: 15px 0;'></div><div class='section'><h2>Resultados Whois</h2><ul><li><b>Nombre de Dominio:</b> dipreca.cl</li><li><b>Registrador:</b> NIC Chile</li><li><b>Fecha de Creación:</b> 1999-05-25 16: 18: 02 CLST</li><li><b>Fecha de Expiración:</b> 2026-06-19 12: 18: 02 CLST</li><li><b>Servidores de Nombre:</b> ns.dipreca.cl (200.68.30.202), qip1.redip.cl</li></ul></div><div class='section'><h2>Resultados Google Dorks</h2><p><strong>Query Ejecutado:</strong> <span class='code'>site:dipreca.cl filetype:log OR &quot;Index of /&quot; OR &quot;admin&quot; OR &quot;login&quot;</span></p><ul><li><b>Título:</b> Login Prestadores<br><b>Enlace:</b> <a href='http: //www.old.dipreca.cl/virtual/prestadores/login.asp' target='_blank'>http://www.old.dipreca.cl/virtual/prestadores/login.asp</a><br><b>Fragmento:</b> MÓDULO PRESTADORES(current). Registrarse · Ayuda. Panel de Ingreso. INGRESE: INGRESE: Entrar. ¿Olvido su contraseña? Responsive Web Design.</li><li><b>Título:</b> PROCESOS INTERNOS<br><b>Enlace:</b> <a href='http://www.aplicaciones.dipreca.cl/ProcesosMensuales/login.php' target='_blank'>http://www.aplicaciones.dipreca.cl/ProcesosMensuales/login.php</a><br><b>Fragmento:</b> Conxole Admin. PROCESOS INTERNOS. Olvido su clave? © 2025 - Depto. Tecnologías de la Informacion - DIPRECA. Todos los derechos reservados.</li><li><b>Título:</b> SISTEMA DE MEDICINA PREVENTIVA - DIPRECA<br><b>Enlace:</b> <a href='http://www.medpreventiva.dipreca.cl:8098/smp/login.asp' target='_blank'>http://www.medpreventiva.dipreca.cl:8098/smp/login.asp</a><br><b>Fragmento:</b> Bienvenido al Sistema de Medicina Preventiva. Logo Dipreca. Icono de mostrar contraseña. Dipreca - Medicina Preventiva.</li><li><b>Título:</b> SISTEMA BONO WEB<br><b>Enlace:</b> <a href='http://www.old.dipreca.cl/virtual/AplicativosSatelites/default.asp' target='_blank'>http://www.old.dipreca.cl/virtual/AplicativosSatelites/default.asp</a><br><b>Fragmento:</b> Conxole Admin. © - Depto. Tecnologías de la Informacion - DIPRECA. Todos los derechos reservados. sistema dns · modular office furniture india · free vpn setup ...</li><li><b>Título:</b> GobiernoTransparente - Escala de Remuneraciones de Dipreca<br><b>Enlace:</b> <a href='http://www.old.dipreca.cl/virtual/TRANSPARENCIA/tabla_remuner/Tabla_Remuneraciones.html' target='_blank'>http://www.old.dipreca.cl/virtual/TRANSPARENCIA/tabla_remuner/Tabla_Remuneraciones.html</a><br><b>Fragmento:</b> Aug 9, 2017 ... Admin. y Aux. DIRECTIVOS, 3, Pesos, 591,559, 77,198, 473,251, 236,624, 177,468, 1,105,550, 92,944, 199,466, 361,048, 192,559, 3,507,666.</li><li><b>Título:</b> Direccion de Prevision de Carabineros de Chile<br><b>Enlace:</b> <a href='http://www.old.dipreca.cl/virtual/TRANSPARENCIA/histopersonal/honorario/2006/honorarios0601.html' target='_blank'>http://www.old.dipreca.cl/virtual/TRANSPARENCIA/histopersonal/honorario/2006/honorarios0601.html</a><br><b>Fragmento:</b> Mar 11, 2025 ... Asesor En Materias Admin. Serv.Méd. Ingeniero En Gestion Publica, 0, 01-ene-07, 31-dic-07. 53, Flores, Astudillo, Reinaldo Ovidio, Medico ...</li><li><b>Título:</b> base de prestadores (suscritos)<br><b>Enlace:</b> <a href='https://www.dipreca.cl/documents/20127/0/BASE+DE+PRESTADORES+ACTUALIZADA+2-1-2019.xlsx/8a758e65-2018-4154-7b4f-09f47179e1f0?t=1549548087523' target='_blank'>https://www.dipreca.cl/documents/20127/0/BASE+DE+PRESTADORES+ACTUALIZADA+2-1-2019.xlsx/8a758e65-2018-4154-7b4f-09f47179e1f0?t=1549548087523</a><br><b>Fragmento:</b> AHUMADA (ADMIN. DE BENEFICIOS FARMACEÚTICOS), 96863980-3, FARMACIAS - PENSIONADOS, X, RED DE SUCURSALES. 3, NACIONAL, NACIONAL, SALCO BRAND S.A., 53003850-5 ...</li><li><b>Título:</b> Untitled<br><b>Enlace:</b> <a href='https://www.dipreca.cl/documents/20127/0/base_prestadores+%284%29.xlsx/f4a1d57e-e72b-952b-0c30-93e668b47cc6?t=1550094412745' target='_blank'>https://www.dipreca.cl/documents/20127/0/base_prestadores+%284%29.xlsx/f4a1d57e-e72b-952b-0c30-93e668b47cc6?t=1550094412745</a><br><b>Fragmento:</b> AHUMADA (ADMIN. DE BENEFICIOS FARMACEÚTICOS), 96863980-3, FARMACIAS - PENSIONADOS, X, RED DE SUCURSALES. 3, NACIONAL, NACIONAL, SALCO BRAND S.A., 53003850-5 ...</li></ul></div>
+    <div class="section">
+        <h2>Análisis de DeepSeek</h2>
+        <pre>### **Análisis de Seguridad para dipreca.cl**
+
+#### **1. Hallazgos Clave**
+- **Infraestructura DNS y Servicios:**
+  - **Registros A/AAAA:** Solo se encontró una dirección IPv4 (`200.54.84.255`), sin IPv6 (no es crítico, pero limita modernización).
+  - **Correo (MX):** Usa Google Workspace (Gmail), lo que sugiere una configuración externa para correo.
+  - **Servidor Web (HTTP/HTTPS):** 
+    - Puerto **80 (HTTP)** y **443 (HTTPS)** abiertos con Apache (versión no especificada) y tecnología JSP/2.3 (potencialmente obsoleta).
+    - Puerto **8443** abierto con el mismo servicio, posiblemente para aplicaciones internas.
+  - **Servidor de Nombres (NS):** 
+    - Usa un servidor propio (`ns.dipreca.cl`) y otro con IP `200.54.0.10` (sin detalles de hardening).
+
+- **Exposición de Servicios:**
+  - **HTTP sin redirección a HTTPS:** No se confirma si el puerto 80 redirige a 443, lo que podría permitir ataques de downgrade.
+  - **Puerto 113 (ident):** Cerrado (sin riesgo).
+  - **Tecnologías Obsoletas:** JSP/2.3 podría tener vulnerabilidades conocidas si no está actualizado.
+
+- **Google Dorks (Información Expuesta):**
+  - **Paneles de Login/Admin:** 
+    - Múltiples sistemas expuestos (`old.dipreca.cl`, `aplicaciones.dipreca.cl`, `medpreventiva.dipreca.cl`) con formularios de ingreso.
+    - Ejemplo: `http: //www.aplicaciones.dipreca.cl/ProcesosMensuales/login.php` (posiblemente sin protección contra brute-force).
+  - **Documentos Sensibles:**
+    - Archivos Excel con datos de prestadores (ej. `BASE+DE+PRESTADORES+ACTUALIZADA+2-1-2019.xlsx`) accesibles públicamente.
+    - Contienen información sensible como RUTs y nombres de farmacias/beneficiarios.
+
+- **Falta de Información Whois:** 
+  - No se pudo obtener datos de registro (puede indicar configuración privada o error en la consulta).
+
+---
+
+#### **2. Vulnerabilidades y Riesgos**
+- **A1 - Exposición de Datos Sensibles:**
+  - Archivos Excel con información personal accesibles sin autenticación (violación potencial de LGPD/Ley de Protección de Datos).
+- **A2 - Sistemas Obsoletos:**
+  - Uso de JSP/2.3 y subdominios como `old.dipreca.cl` (riesgo de exploits conocidos).
+- **A3 - Falta de Hardening en Servicios Web:**
+  - No se detectan headers de seguridad (CSP, HSTS) o WAF en los puertos 443/8443.
+- **A4 - Paneles de Administración Públicos:**
+  - Login expuestos (`login.asp`, `login.php`) sin medidas anti-brute force (ej. CAPTCHA, rate-limiting).
+- **A5 - Subdominios No Seguros:**
+  - `old.dipreca.cl` y `medpreventiva.dipreca.cl: 8098` usan HTTP o puertos no estándar (riesgo de sniffing).
+
+---
+
+#### **3. Recomendaciones de Seguridad**
+1. **Protección de Datos:**
+   - Restringir el acceso a archivos sensibles (ej. Excel) con autenticación y almacenarlos en rutas no indexables.
+   - Eliminar datos personales de documentos públicos o anonimizarlos.
+
+2. **Actualización y Hardening:**
+   - Actualizar Apache y tecnologías JSP a versiones soportadas.
+   - Implementar redirección forzada HTTP → HTTPS (HSTS) y headers de seguridad (CSP, X-Content-Type-Options).
+
+3. **Protección de Logins:**
+   - Añadir CAPTCHA, rate-limiting y MFA en paneles de administración.
+   - Migrar sistemas obsoletos (`login.asp`) a tecnologías modernas con cifrado fuerte.
+
+4. **Monitoreo y Auditoría:**
+   - Escanear regularmente subdominios y puertos expuestos con herramientas como Nessus/OpenVAS.
+   - Revisar logs de acceso para detectar intentos de fuerza bruta.
+
+5. **Segmentación de Red:**
+   - Aislar servicios internos (ej. `aplicaciones.dipreca.cl`) detrás de una VPN o red privada.
+
+6. **Cierre de Puertos Innecesarios:**
+   - Deshabilitar el puerto 8443 si no es esencial o asegurarlo con certificados válidos.
+
+---
+
+#### **Conclusión**
+El objetivo presenta riesgos **moderados a altos** por exposición de datos sensibles, sistemas obsoletos y falta de controles de acceso en paneles críticos. Se recomienda priorizar la protección de información personal y la actualización de servicios web para mitigar ataques comunes (ej. inyecciones, fuerza bruta).</pre>
+    </div>
+        </div></body></html>
